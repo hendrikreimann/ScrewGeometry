@@ -3,8 +3,6 @@
 % Maps an axis vector to the skew symmetric matrix encoding the cross
 % product with the axis vector. Inverse of the vee-operator
 function skewMatrix = wedgeAxis(axis)
-
-
     skewMatrix = zeros(3, 3);
     try
         skewMatrix(1, 1) = 0;
