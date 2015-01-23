@@ -4,6 +4,9 @@
 % default the angle is positive.
 function [axis, angle] = logAxis(rotationMatrix, useNegativeTheta)
     axis = zeros(3, 1);
+    if nargin < 2
+        useNegativeTheta = false;
+    end
     try
         rotation_matrix_trace = trace(rotationMatrix);
         % calculate rotation angle
@@ -50,7 +53,7 @@ function [axis, angle] = logAxis(rotationMatrix, useNegativeTheta)
               axis(3, 1) = - sqrt((rotationMatrix(3, 3) - cos_theta) / (1-cos_theta));
             end
         end
-        
+        angle = normalizeAngle(angle);
     catch exception
         rethrow(exception);
     end
