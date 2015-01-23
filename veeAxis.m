@@ -5,7 +5,7 @@
 
 function axis = veeAxis(matrix)
     axis = zeros(3, 1);
-    if isequal(matrix, -matrix')
+    if isZero(matrix + matrix')
         try
             axis(1, 1) = matrix(3, 2);
             axis(2, 1) = matrix(1, 3);

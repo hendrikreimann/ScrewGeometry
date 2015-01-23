@@ -2,5 +2,5 @@
 
 function is_zero = isZero(number)
     epsilon = 1e-8;
-    is_zero = (abs(number) < epsilon);
+    is_zero = (max(abs(number)) < epsilon);
 end
