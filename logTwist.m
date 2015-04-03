@@ -1,9 +1,20 @@
-%% logTwist
-% inverse of exp: se(3) -> SE(3)
-% Transforms a rigid transformation matrix to a twist matrix and angle of
-% rotation, by default the angle is positive.
-
 function [twist, angle] = logTwist(transformationMatrix, useNegativeTheta)
+% Logarithm map SE(3) -> se(3), using Rodriguez' formula
+%
+% This is the inverse of the exp: se(3) -> SE(3)
+%
+% [xi, theta] = LOGTWIST(R) transforms a 4x4 rigid transformation matrix
+%               into the twist xi and the angle of rotation theta. The 
+%               angle of rotation is chosen to be positive.
+% [xi, theta] = LOGTWIST(R, useNegativeTheta) chooses the angle of
+%               rotation theta to be negative.
+%
+% See also LOGAXIS, EXPTWIST
+
+    if (size(transformationMatrix, 1) ~= 4) || (size(transformationMatrix, 2) ~= 4)
+        error('transformationMatrix must be a 3x3 matrix.')
+    end
+    
     if nargin < 2
         useNegativeTheta = false;
     end
@@ -20,7 +31,7 @@ function [twist, angle] = logTwist(transformationMatrix, useNegativeTheta)
     if isZero(norm(translation))
         v = zeros(3, 1);
     else
-        v = ((eye(3, 3) - rotation) * omega_wedge + omega_wedge * omega_wedge' * angle)^(-1) * translation;
+        v = ((eye(3, 3) - rotation) * omega_wedge + omega * omega' * angle)^(-1) * translation;
     end
 
     % concatenate omega and v to get twist coordinates

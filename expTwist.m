@@ -1,7 +1,19 @@
-% exponential map se(3) -> SE(3)
-% Transforms a twist matrix (corresponding to a normed axis and support
-% point) to the rotation around that axis with the given angle.
 function transformationMatrix = expTwist(twist, angle)
+% Exponential map se(3) -> SE(3)
+%
+% T = EXPTWIST(xi, theta) transforms a twist xi and angle theta
+%     into the 4x4 rigid transformation matrix T representing rotation by 
+%     theta around xi. The twist can be given in matrix or coordinate
+%     representation.
+%
+% See also LOGTWIST, EXPAXIS
+    
+    if (size(twist, 1) == 4) && (size(twist, 2) == 4)
+        twist = wedgeTwist(twist);
+    end
+    if (size(twist, 1) ~= 6) || (size(twist, 2) ~= 1)
+        error('twist must be a 4x4 twist matrix or 6x1 twist coordinate vector.')
+    end
     v = twist(1:3, 1);
     omega = twist(4:6, 1);
 

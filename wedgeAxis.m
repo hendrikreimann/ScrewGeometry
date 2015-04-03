@@ -1,8 +1,15 @@
-%% wedgeAxis
-% wedge-operator for axes of a rotation.
-% Maps an axis vector to the skew symmetric matrix encoding the cross
-% product with the axis vector. Inverse of the vee-operator
 function skewMatrix = wedgeAxis(axis)
+% Wedge-operator R^3 --> so(3)
+%
+% transforms a vector to the skew-symmetric matrix representing the cross
+% product with that vector
+%
+% omegaHat = WEDGEAXIS(omega) transforms a 3d axis vector omega into a 
+%                        3x3 skew-symmetric matrix
+%
+% See also VEEAXIS, EXPAXIS
+
+
     skewMatrix = zeros(3, 3);
     try
         skewMatrix(1, 1) = 0;

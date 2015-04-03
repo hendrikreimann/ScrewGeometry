@@ -1,8 +1,20 @@
-%% logAxis
-% inverse of exp: so(3) -> SO(3)
-% Transforms a rotation matrix to its axis and angle of rotation, by
-% default the angle is positive.
 function [axis, angle] = logAxis(rotationMatrix, useNegativeTheta)
+% Logarithm map SO(3) -> so(3), using Rodriguez' formula
+%
+% This is the inverse of the exp: so(3) -> SO(3)
+%
+% [omega, theta] = LOGAXIS(R) transforms a 3x3 rotation matrix into the
+%                  axis of rotation omega and the angle of rotation theta. 
+%                  The angle of rotation is chosen to be positive.
+% [omega, theta] = LOGAXIS(R, useNegativeTheta) chooses the angle of
+%                  rotation theta to be negative.
+%
+% See also EXPAXIS
+
+    if (size(rotationMatrix, 1) ~= 3) || (size(rotationMatrix, 2) ~= 3)
+        error('rotationMatrix must be a 3x3 matrix.')
+    end
+
     axis = zeros(3, 1);
     if nargin < 2
         useNegativeTheta = false;

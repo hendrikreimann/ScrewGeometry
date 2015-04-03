@@ -1,8 +1,13 @@
-%% veeTwist
-% Vee operator for twists
-% Transforms a twist in matrix form to the twist coordinate vector.
-
 function twistCoordinates = veeTwist(twistMatrix)
+% Vee-operator se(3) --> R^6
+%
+% transforms twist matrices to the corresponding twist coordinates
+%
+% xiHat = VEETWIST(xi) transforms a 4x4 twist matrix xiHat into a 6d twist 
+%                      coordinate vector xi
+%                        
+%
+% See also WEDGETWIST
     twistCoordinates = zeros(6, 1);
     try
         % position

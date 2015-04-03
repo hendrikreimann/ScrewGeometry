@@ -1,9 +1,13 @@
-
-%% vee operator for axes of a rotation
-% Maps a skew symmetric matrix encoding the cross product with a vector
-% to that vector.
-
 function axis = veeAxis(matrix)
+% Vee-operator so(3) --> R^3
+%
+% transforms a skew-symmetric matrix representing the cross
+% product with a vector to that vector
+%
+% omega = VEEAXIS(omegaHat) transforms a 3x3 skew-symmetric matrix into a 
+%                           3d vector omega
+%
+% See also WEDGEAXIS
     axis = zeros(3, 1);
     if isZero(matrix + matrix')
         try
