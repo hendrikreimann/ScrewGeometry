@@ -1,7 +1,13 @@
-%% wedgeTwist
-% Transforms the 6d coordinate vector of a twist to the matrix representation.
-
 function twistMatrix = wedgeTwist(twistCoordinates)
+% Wedge-operator R^6 --> se(3)
+%
+% transforms twist coordinates to the corresponding twist matrix
+%
+% xiHat = WEDGETWIST(xi) transforms a 6d twist coordinate vector xi into a 
+%                        4x4 twist matrix
+%
+% See also VEETWIST, EXPTWIST
+
     twistMatrix = zeros(4, 4);
     try
         twistMatrix(1, 2) = -twistCoordinates(6);
