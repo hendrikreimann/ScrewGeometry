@@ -8,6 +8,9 @@ function twist = generateTwistCoordinates(supportPoint, axis, type)
 %
 % See also EXPTWIST
 
+    if nargin < 3
+        type = 1;
+    end
     if type == 1
         if (size(supportPoint, 1) ~= 3) || (size(supportPoint, 2) ~= 1)
             error('supportPoint must be a 3x1 vector.')
