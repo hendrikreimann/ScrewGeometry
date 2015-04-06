@@ -22,7 +22,7 @@ function transformationMatrix = expTwist(twist, angle)
 
     % translation
     if (isZero(norm(omega))) % pure translation
-        translation = v * theta;
+        translation = v * angle;
     else % translation and rotation
         translation = (eye(3,3) - rotation)*(cross(omega, v)) + omega*omega'*v*angle;
     end
