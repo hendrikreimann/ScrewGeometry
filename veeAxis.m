@@ -1,4 +1,4 @@
-function axis = veeAxis(matrix)
+function axis = veeAxis(matrix, ignoreSkewRequirement)
 % Vee-operator so(3) --> R^3
 %
 % transforms a skew-symmetric matrix representing the cross
@@ -9,7 +9,7 @@ function axis = veeAxis(matrix)
 %
 % See also WEDGEAXIS
     axis = zeros(3, 1);
-    if isZero(matrix + matrix')
+    if isZero(matrix + matrix') || ignoreSkewRequirement
         try
             axis(1, 1) = matrix(3, 2);
             axis(2, 1) = matrix(1, 3);
