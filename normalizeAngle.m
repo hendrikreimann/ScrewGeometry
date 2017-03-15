@@ -15,16 +15,27 @@
 %     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-function angle = normalizeAngle(angle)
+function angle = normalizeAngle(angle, leafchange)
 % normalizes an angle in radian to the interval (-pi, pi]
 %
 % phi_normalized = NORMALIZEANGLE(phi) subtracts or adds 2PI to each
 % element in phi. Phi can be a scalar or a multi-dimensional array.
+% leafchange is the location of the discontinuity. If unset, this will be pi.
 
-while any(any(angle <= -pi))
-    angle(angle <= -pi) = angle(angle <= -pi) + 2*pi;
+if nargin == 2
+    leafchange = normalizeAngle(leafchange);
 end
-while any(any(angle > pi))
-    angle(angle > pi) = angle(angle > pi) - 2*pi;
+if nargin < 2
+    leafchange = pi;
 end
+
+
+while any(any(angle <= leafchange-2*pi))
+    angle(angle <= leafchange-2*pi) = angle(angle <= leafchange-2*pi) + 2*pi;
+end
+while any(any(angle > leafchange))
+    angle(angle > leafchange) = angle(angle > leafchange) - 2*pi;
+end
+
+
     
